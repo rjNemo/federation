@@ -1,0 +1,13 @@
+type Product @key(fields:"upc"){
+    upc: String!
+    name: String
+    price: Int
+    weight: Int
+}
+
+type ProductResponse implements Response{
+    "Product Response"
+    success: Boolean!
+    errorMessage: String
+    product: Product
+}

@@ -1,0 +1,4 @@
+type Query {
+    "Returns a user by its name"
+    user(name: String): User
+}

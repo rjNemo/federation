@@ -1,0 +1,72 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+interface Response {
+    errorMessage: String
+    success: Boolean!
+}
+
+type Mutation {
+    "Create a user"
+    createUser(input: UserInput!): UserResponse
+}
+
+type Product {
+    name: String
+    price: Int
+    reviews: [Review]
+    upc: String!
+    weight: Int
+}
+
+type ProductResponse implements Response {
+    errorMessage: String
+    product: Product
+    "Product Response"
+    success: Boolean!
+}
+
+type Query {
+    reviews(first: Int = 5): [Review]
+    topProducts(first: Int = 5): [Product]
+    "Returns a user by its name"
+    user(name: String): User
+}
+
+type Review {
+    author: User
+    body: String
+    id: ID!
+    product: Product
+}
+
+type ReviewResponse implements Response {
+    errorMessage: String
+    review: Review
+    "Review Response"
+    success: Boolean!
+}
+
+type User {
+    email: String!
+    "A user"
+    id: ID!
+    name: String!
+    reviews: [Review]
+}
+
+type UserResponse implements Response {
+    errorMessage: String
+    "User Response"
+    success: Boolean!
+    user: User
+}
+
+input UserInput {
+    "User input"
+    name: String!
+}

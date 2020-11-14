@@ -1,0 +1,56 @@
+import { FragmentDefinitionNode, OperationDefinitionNode, SelectionNode as GraphQLJSSelectionNode } from 'graphql';
+import { ComposedGraphQLSchema } from '@apollo/federation';
+export declare type ResponsePath = (string | number)[];
+export declare type WasmPointer = number;
+declare type FragmentMap = {
+    [fragmentName: string]: FragmentDefinitionNode;
+};
+export declare type OperationContext = {
+    schema: ComposedGraphQLSchema;
+    operation: OperationDefinitionNode;
+    fragments: FragmentMap;
+    queryPlannerPointer: WasmPointer;
+    operationString: string;
+};
+export interface QueryPlan {
+    kind: 'QueryPlan';
+    node?: PlanNode;
+}
+export declare type PlanNode = SequenceNode | ParallelNode | FetchNode | FlattenNode;
+export interface SequenceNode {
+    kind: 'Sequence';
+    nodes: PlanNode[];
+}
+export interface ParallelNode {
+    kind: 'Parallel';
+    nodes: PlanNode[];
+}
+export interface FetchNode {
+    kind: 'Fetch';
+    serviceName: string;
+    variableUsages?: string[];
+    requires?: QueryPlanSelectionNode[];
+    operation: string;
+}
+export interface FlattenNode {
+    kind: 'Flatten';
+    path: ResponsePath;
+    node: PlanNode;
+}
+export declare type QueryPlanSelectionNode = QueryPlanFieldNode | QueryPlanInlineFragmentNode;
+export interface QueryPlanFieldNode {
+    readonly kind: 'Field';
+    readonly alias?: string;
+    readonly name: string;
+    readonly selections?: QueryPlanSelectionNode[];
+}
+export interface QueryPlanInlineFragmentNode {
+    readonly kind: 'InlineFragment';
+    readonly typeCondition?: string;
+    readonly selections: QueryPlanSelectionNode[];
+}
+export declare function serializeQueryPlan(queryPlan: QueryPlan): string;
+export declare function getResponseName(node: QueryPlanFieldNode): string;
+export declare const trimSelectionNodes: (selections: readonly GraphQLJSSelectionNode[]) => QueryPlanSelectionNode[];
+export {};
+//# sourceMappingURL=QueryPlan.d.ts.map

@@ -1,0 +1,18 @@
+type User @key(fields:"email") {
+    "A user"
+    id:ID!
+    name: String!
+    email: String!
+}
+
+input UserInput {
+    "User input"
+    name: String!
+}
+
+type UserResponse implements Response{
+    "User Response"
+    success: Boolean!
+    errorMessage: String
+    user: User
+}

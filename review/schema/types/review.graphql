@@ -1,0 +1,23 @@
+type Review @key(fields: "id") {
+    id: ID!
+    body: String
+    author: User @provides(fields: "email")
+    product: Product @provides(fields: "upc")
+}
+
+type User @key(fields: "email") @extends {
+    email: String! @external
+    reviews: [Review]
+}
+
+type Product @key(fields: "upc") @extends {
+    upc: String! @external
+    reviews: [Review]
+}
+
+type ReviewResponse implements Response{
+    "Review Response"
+    success: Boolean!
+    errorMessage: String
+    review: Review
+}
