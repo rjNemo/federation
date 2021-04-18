@@ -1,4 +1,4 @@
 type Mutation {
     "Create a user"
-    createUser(input: UserInput!): UserResponse
+    createUser(userData: UserInput!): UserResponse
 }

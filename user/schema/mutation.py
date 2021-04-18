@@ -1,4 +1,4 @@
-from ariadne import MutationType
+from ariadne import MutationType, convert_kwargs_to_snake_case
 
 from user.models.user import User, UserResponse, UserInput
 
@@ -15,9 +15,10 @@ def create_user(user_input: UserInput) -> User:
 
 
 @mutation.field("createUser")
-def resolve_create_user(*_, input: dict) -> UserResponse:
+@convert_kwargs_to_snake_case
+def resolve_create_user(*_, user_data: dict) -> UserResponse:
     try:
-        user_input = UserInput(name=input.get("name"))
+        user_input = UserInput(name=user_data["name"])
         user = create_user(user_input)
         return UserResponse(user=user)
     except ValueError as error:

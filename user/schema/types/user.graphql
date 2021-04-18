@@ -1,6 +1,6 @@
 type User @key(fields:"email") {
     "A user"
-    id:ID!
+    id: ID!
     name: String!
     email: String!
 }

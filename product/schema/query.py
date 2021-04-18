@@ -17,4 +17,5 @@ def resolve_top_products(*_, first: int):
             weight=randint(0, first),
             name=choice(ascii_letters),
         )
-    ] * first
+        for _ in range(first)
+    ]

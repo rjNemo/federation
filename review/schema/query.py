@@ -19,4 +19,5 @@ def resolve_reviews(*_, first: int):
             author=User(),
             product=Product(upc="id", name="product", price=10, weight=12),
         )
-    ] * first
+        for _ in range(first)
+    ]

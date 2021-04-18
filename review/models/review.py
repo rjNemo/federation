@@ -6,7 +6,7 @@ from user.models.user import User
 
 @dataclass
 class Review:
-    id: str
+    id: int
     body: str
     author: User
     product: Product
