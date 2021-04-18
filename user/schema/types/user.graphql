@@ -10,7 +10,7 @@ input UserInput {
     name: String!
 }
 
-type UserResponse implements Response{
+type UserResponse implements Response {
     "User Response"
     success: Boolean!
     errorMessage: String
