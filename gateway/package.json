@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@apollo/gateway": "^0.21.1",
-    "apollo-server": "^2.25.3",
+    "apollo-server": "^2.25.4",
     "graphql": "^15.4.0",
     "nodemon": "^2.0.6"
   },
